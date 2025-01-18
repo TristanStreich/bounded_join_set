@@ -15,7 +15,7 @@ categories = ["asynchronous"]
 keywords = ["tokio", "async", "non-blocking", "futures", "concurrency"]
 
 [dependencies]
-tokio = { version = "1.43", features = ["rt", "sync"] }
+tokio = { version = "1.42", features = ["rt", "sync"] }
 
 [dev-dependencies]
-tokio = { version = "1.43", features = ["macros", "time", "rt-multi-thread"] }
+tokio = { version = "1.42", features = ["macros", "time", "rt-multi-thread"] }

@@ -14,10 +14,8 @@ A Concurrency-Limited JoinSet for Tokio.
 categories = ["asynchronous"]
 keywords = ["tokio", "async", "non-blocking", "futures", "concurrency"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-tokio = { version = "1.32", features = ["rt", "sync"] }
+tokio = { version = "1.43", features = ["rt", "sync"] }
 
 [dev-dependencies]
-tokio = { version = "1.32", features = ["macros", "time", "rt-multi-thread"] }
+tokio = { version = "1.43", features = ["macros", "time", "rt-multi-thread"] }

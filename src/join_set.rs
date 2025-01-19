@@ -121,7 +121,7 @@ impl<T: 'static> JoinSet<T> {
         self.inner_join_set.join_next().await
     }
 
-    pub async fn try_join_next(&mut self) -> Option<Result<T, JoinError>> {
+    pub fn try_join_next(&mut self) -> Option<Result<T, JoinError>> {
         self.inner_join_set.try_join_next()
     }
 

@@ -9,9 +9,9 @@ A Concurrency-Limited JoinSet for Tokio.
 [crates-badge]: https://img.shields.io/crates/v/bounded_join_set.svg
 [crates-url]: https://crates.io/crates/bounded_join_set
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-url]: https://github.com/tStreichenberger/bounded_join_set/blob/main/LICENSE
-[actions-badge]: https://github.com/tStreichenberger/bounded_join_set/workflows/Rust/badge.svg
-[actions-url]: https://github.com/tStreichenberger/bounded_join_set/actions?query=branch%3Amain++
+[mit-url]: https://github.com/TristanStreich/bounded_join_set/blob/main/LICENSE
+[actions-badge]: https://github.com/TristanStreich/bounded_join_set/workflows/Tests/badge.svg
+[actions-url]: https://github.com/TristanStreich/bounded_join_set/actions?query=branch%3Amain++
 
 <!-- cargo-rdme start -->
 
@@ -31,7 +31,7 @@ Add `bounded_join_set` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-bounded_join_set = "0.1.0"
+bounded_join_set = "0.2.0"
 ```
 
 Here's a basic usage example:
@@ -80,5 +80,5 @@ have suggestions, please feel free to open an issue on our GitHub repository.
 
 Contributions, feature requests, and feedback are always welcome. Feel free to open an issue or a pull request on the GitHub repository.
 
-__License:__ [MIT](https://github.com/tStreichenberger/bounded_join_set/blob/main/LICENSE)
+__License:__ [MIT](LICENSE)
 

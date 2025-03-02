@@ -8,7 +8,7 @@ use std::{
 
 use tokio::{sync::Semaphore, task::JoinSet as TokioJoinSet};
 
-use crate::tokio_exports::{AbortHandle, Handle, JoinError, LocalSet};
+use crate::tokio_exports::{AbortHandle, Handle, Id, JoinError, LocalSet};
 
 /// Same as [`tokio::task::JoinSet`] except the number of actively polled futures is limited to a set concurrency.
 ///
@@ -121,8 +121,16 @@ impl<T: 'static> JoinSet<T> {
         self.inner_join_set.join_next().await
     }
 
+    pub async fn join_next_with_id(&mut self) -> Option<Result<(Id, T), JoinError>> {
+        self.inner_join_set.join_next_with_id().await
+    }
+
     pub fn try_join_next(&mut self) -> Option<Result<T, JoinError>> {
         self.inner_join_set.try_join_next()
+    }
+
+    pub fn try_join_next_with_id(&mut self) -> Option<Result<(Id, T), JoinError>> {
+        self.inner_join_set.try_join_next_with_id()
     }
 
     pub async fn join_all(self) -> Vec<T> {
@@ -143,6 +151,10 @@ impl<T: 'static> JoinSet<T> {
 
     pub fn poll_join_next(&mut self, cx: &mut Context<'_>) -> Poll<Option<Result<T, JoinError>>> {
         self.inner_join_set.poll_join_next(cx)
+    }
+
+    pub fn poll_join_next_with_id(&mut self, cx: &mut Context<'_>) -> Poll<Option<Result<(Id, T), JoinError>>> {
+        self.inner_join_set.poll_join_next_with_id(cx)
     }
 }
 

@@ -80,9 +80,7 @@ impl<T: 'static> JoinSet<T> {
 
             task_inactive_count.fetch_sub(1, Ordering::Release);
 
-            let output = task.await;
-
-            output
+            task.await
         }
     }
 

@@ -31,7 +31,7 @@ Add `bounded_join_set` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-bounded_join_set = "0.2.0"
+bounded_join_set = "0.3.0"
 ```
 
 Here's a basic usage example:
@@ -62,12 +62,12 @@ async fn main() {
 
 ### Limitations
 
-While `bounded_join_set` aims to offer an enhanced concurrency control over Tokio's native `JoinSet`, 
+While `bounded_join_set` aims to offer an enhanced concurrency control over Tokio's native `JoinSet`,
 there are certain limitations to be aware of:
 
-- **No `spawn_blocking` Support**: As of the current version, the crate does not support the `spawn_blocking` method 
-  provided by Tokio. If your application relies heavily on CPU-bound operations that would benefit from the `spawn_blocking` feature, 
-  you'll need to manage that separately from this crate. We are looking into extending support for this in future releases, 
+- **No `spawn_blocking` Support**: As of the current version, the crate does not support the `spawn_blocking` method
+  provided by Tokio. If your application relies heavily on CPU-bound operations that would benefit from the `spawn_blocking` feature,
+  you'll need to manage that separately from this crate. We are looking into extending support for this in future releases,
   but there's no definite timeline yet.
 
 <!-- cargo-rdme end -->

@@ -14,7 +14,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! bounded_join_set = "0.1.0"
+//! bounded_join_set = "0.3.0"
 //! ```
 //!
 //! Here's a basic usage example:

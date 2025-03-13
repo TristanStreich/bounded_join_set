@@ -167,7 +167,10 @@ impl<T: 'static> JoinSet<T> {
     }
 
     /// See [TokioJoinSet::poll_join_next_with_id]
-    pub fn poll_join_next_with_id(&mut self, cx: &mut Context<'_>) -> Poll<Option<Result<(Id, T), JoinError>>> {
+    pub fn poll_join_next_with_id(
+        &mut self,
+        cx: &mut Context<'_>,
+    ) -> Poll<Option<Result<(Id, T), JoinError>>> {
         self.inner_join_set.poll_join_next_with_id(cx)
     }
 }

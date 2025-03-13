@@ -60,6 +60,6 @@ pub use join_set::*;
 pub mod tokio_exports {
     pub use tokio::{
         runtime::Handle,
-        task::{AbortHandle, JoinError, LocalSet},
+        task::{AbortHandle, Id, JoinError, LocalSet},
     };
 }

@@ -8,7 +8,7 @@ use std::{
 
 use tokio::{sync::Semaphore, task::JoinSet as TokioJoinSet};
 
-use crate::tokio_exports::{AbortHandle, Handle, JoinError, LocalSet};
+use crate::tokio_exports::{AbortHandle, Handle, Id, JoinError, LocalSet};
 
 /// Same as [`tokio::task::JoinSet`] except the number of actively polled futures is limited to a set concurrency.
 ///
@@ -84,6 +84,7 @@ impl<T: 'static> JoinSet<T> {
         }
     }
 
+    /// See [TokioJoinSet::spawn]
     pub fn spawn<F>(&mut self, task: F) -> AbortHandle
     where
         F: Future<Output = T> + Send + 'static,
@@ -92,6 +93,7 @@ impl<T: 'static> JoinSet<T> {
         self.inner_join_set.spawn(self.wrap_task(task))
     }
 
+    /// See [TokioJoinSet::spawn_on]
     pub fn spawn_on<F>(&mut self, task: F, handle: &Handle) -> AbortHandle
     where
         F: Future<Output = T> + Send + 'static,
@@ -100,6 +102,7 @@ impl<T: 'static> JoinSet<T> {
         self.inner_join_set.spawn_on(self.wrap_task(task), handle)
     }
 
+    /// See [TokioJoinSet::spawn_local]
     pub fn spawn_local<F>(&mut self, task: F) -> AbortHandle
     where
         F: Future<Output = T> + 'static,
@@ -107,6 +110,7 @@ impl<T: 'static> JoinSet<T> {
         self.inner_join_set.spawn_local(self.wrap_task(task))
     }
 
+    /// See [TokioJoinSet::spawn_local_on]
     pub fn spawn_local_on<F>(&mut self, task: F, local_set: &LocalSet) -> AbortHandle
     where
         F: Future<Output = T> + 'static,
@@ -115,32 +119,57 @@ impl<T: 'static> JoinSet<T> {
             .spawn_local_on(self.wrap_task(task), local_set)
     }
 
+    /// See [TokioJoinSet::join_next]
     pub async fn join_next(&mut self) -> Option<Result<T, JoinError>> {
         self.inner_join_set.join_next().await
     }
 
+    /// See [TokioJoinSet::join_next_with_id]
+    pub async fn join_next_with_id(&mut self) -> Option<Result<(Id, T), JoinError>> {
+        self.inner_join_set.join_next_with_id().await
+    }
+
+    /// See [TokioJoinSet::try_join_next]
     pub fn try_join_next(&mut self) -> Option<Result<T, JoinError>> {
         self.inner_join_set.try_join_next()
     }
 
+    /// See [TokioJoinSet::try_join_next_with_id]
+    pub fn try_join_next_with_id(&mut self) -> Option<Result<(Id, T), JoinError>> {
+        self.inner_join_set.try_join_next_with_id()
+    }
+
+    /// See [TokioJoinSet::join_all]
     pub async fn join_all(self) -> Vec<T> {
         self.inner_join_set.join_all().await
     }
 
+    /// See [TokioJoinSet::spawn]
     pub async fn shutdown(&mut self) {
         self.inner_join_set.shutdown().await;
     }
 
+    /// See [TokioJoinSet::abort_all]
     pub fn abort_all(&mut self) {
         self.inner_join_set.abort_all();
     }
 
+    /// See [TokioJoinSet::detach_all]
     pub fn detach_all(&mut self) {
         self.inner_join_set.detach_all();
     }
 
+    /// See [TokioJoinSet::poll_join_next]
     pub fn poll_join_next(&mut self, cx: &mut Context<'_>) -> Poll<Option<Result<T, JoinError>>> {
         self.inner_join_set.poll_join_next(cx)
+    }
+
+    /// See [TokioJoinSet::poll_join_next_with_id]
+    pub fn poll_join_next_with_id(
+        &mut self,
+        cx: &mut Context<'_>,
+    ) -> Poll<Option<Result<(Id, T), JoinError>>> {
+        self.inner_join_set.poll_join_next_with_id(cx)
     }
 }
 

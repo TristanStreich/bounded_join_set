@@ -22,3 +22,7 @@ jobs:
       run: cargo test --verbose
     - name: Check fmt
       run: cargo fmt --check
+    - name: Check if the README is up to date.
+      run: |
+        cargo install cargo-rdme
+        cargo rdme --check
